@@ -6,8 +6,8 @@
 trigger:
 - master
 
-pool: 'Azure Pipelines'
-  
+pool: 
+  name: 'Azure Pipelines'
 
 steps:
 - task: NodeTool@0
@@ -18,4 +18,5 @@ steps:
 - script: |
     npm install
     npm run build
-  displayName: 'npm install and build'
+  displayName: 'Build project'
+
