@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool: 
-  name: 'Azure Pipelines'  # Ensure this matches your agent pool name
+  name: 'AIntellipaat'  # Ensure this matches your agent pool name
 
 steps:
 - task: NodeTool@0
