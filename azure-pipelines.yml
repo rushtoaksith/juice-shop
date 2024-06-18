@@ -22,7 +22,7 @@ steps:
     npm install --legacy-peer-deps
     npm run build
   displayName: 'Build project'
-  workingDirectory: '$(Build.SourcesDirectory)'  # Ensure commands are run in the 'juiceshop' folder
+  workingDirectory: '$(Build.SourcesDirectory)/juiceshop'  # Ensure commands are run in the 'juiceshop' folder
 
 
 
