@@ -10,14 +10,19 @@ pool:
   name: 'Intellipaat'  # Ensure this matches your agent pool name
 
 steps:
+- checkout: self
+  path: 'juiceshop'  # Cloning the repository into a folder named 'juiceshop'
+
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+    versionSpec: '20.x'
+  displayName: 'Install Node.js 20'
 
 - script: |
     npm install
     npm run build
   displayName: 'Build project'
+  workingDirectory: '$(Build.SourcesDirectory)'  # Ensure commands are run in the 'juiceshop' folder
+
 
 
