@@ -3,26 +3,41 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
+# azure-pipelines.yml
 trigger:
-- master
+- main
 
-pool: 
-  name: 'Intellipaat'  # Ensure this matches your agent pool name
+pool:
+  name: 'Intellipaat'
+  demands:
+  - agent.name -equals Aksith
 
 steps:
-- checkout: self
-  path: 'juiceshop'  # Cloning the repository into a folder named 'juiceshop'
-
 - task: NodeTool@0
   inputs:
     versionSpec: '20.x'
-  displayName: 'Install Node.js 20'
+  displayName: 'Install Node.js'
 
 - script: |
-    npm install --legacy-peer-deps
+    npm install
     npm run build
-  displayName: 'Build project'
-  workingDirectory: '$(Build.SourcesDirectory)/juiceshop'  # Ensure commands are run in the 'juiceshop' folder
+  displayName: 'Install dependencies and build'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+  displayName: 'Archive files'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'drop'
+  displayName: 'Publish artifacts'
+
 
 
 
