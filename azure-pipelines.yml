@@ -20,7 +20,7 @@ steps:
 
 - script: |
     npm install
-    npm run build
+    npm start
   displayName: 'Install dependencies and build'
 
 - task: ArchiveFiles@2
